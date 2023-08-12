@@ -46,7 +46,7 @@ public_users.get('/isbn/:isbn',function (req, res) {
 public_users.get('/author/:author',function (req, res) {
 
   const author = req.body.author;
-  let searched_book = books.filter((book)=>book.author===author);
+  let searched_book = books.filter((book)=>book["author"]===author);
   if(searched_book.length>0){
     res.send(searched_book[0]);
   }else{
@@ -58,7 +58,7 @@ public_users.get('/author/:author',function (req, res) {
 public_users.get('/title/:title',function (req, res) {
 
   const title= req.body.title;
-  let searched_book = books.filter((book)=>book.title===title);
+  let searched_book = books.filter((book)=>book["title"]===title);
   if(searched_book.length>0){
     res.send(searched_book[0]);
   }else{
