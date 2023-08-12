@@ -33,9 +33,9 @@ public_users.get('/',function (req, res) {
 // Get book details based on ISBN
 public_users.get('/isbn/:isbn',function (req, res) {
   const isbn = req.params.isbn;
-  let avl_books = books[parseInt(isbn)];
-  if(avl_books.length>0){
-    res.send(JSON.stringify(avl_books[0],null));
+  let book = books[isbn];
+  if(book){
+    res.json(book);
   }else{
     res.send("wrong isbn given");
   }
@@ -69,9 +69,9 @@ public_users.get('/title/:title',function (req, res) {
 //  Get book review
 public_users.get('/review/:isbn',function (req, res) {
    const isbn = req.params.isbn;
-  let searched_book = books[parseInt(isbn)];
-  if(searched_book.length>0){
-    res.send(searched_book[0].reviews);
+  let searched_book = books[isbn];
+  if(searched_book){
+    res.send(searched_book["reviews"]);
   }else{
     res.send("book is not available");
   }
