@@ -33,7 +33,7 @@ public_users.get('/',function (req, res) {
 // Get book details based on ISBN
 public_users.get('/isbn/:isbn',function (req, res) {
   const isbn = req.params.isbn;
-  let avl_books = books[isbn-1];
+  let avl_books = books[parseInt(isbn)];
   if(avl_books.length>0){
     res.send(JSON.stringify(avl_books[0],null));
   }else{
@@ -46,7 +46,7 @@ public_users.get('/isbn/:isbn',function (req, res) {
 public_users.get('/author/:author',function (req, res) {
 
   const author = req.params.author;
-  let searched_book = books.filter((book)=>book["author"]===author);
+  let searched_book = Object.values(books).filter((book)=>book.author===author);
   if(searched_book.length>0){
     res.send(searched_book[0]);
   }else{
@@ -58,7 +58,7 @@ public_users.get('/author/:author',function (req, res) {
 public_users.get('/title/:title',function (req, res) {
 
   const title= req.params.title;
-  let searched_book = books.filter((book)=>book["title"]===title);
+  let searched_book = Object.values(books).filter((book)=>book.title===title);
   if(searched_book.length>0){
     res.send(searched_book[0]);
   }else{
@@ -69,7 +69,7 @@ public_users.get('/title/:title',function (req, res) {
 //  Get book review
 public_users.get('/review/:isbn',function (req, res) {
    const isbn = req.params.isbn;
-  let searched_book = books[isbn-1];
+  let searched_book = books[parseInt(isbn)];
   if(searched_book.length>0){
     res.send(searched_book[0].reviews);
   }else{
