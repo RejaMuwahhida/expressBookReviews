@@ -45,7 +45,7 @@ public_users.get('/isbn/:isbn',function (req, res) {
 // Get book details based on author
 public_users.get('/author/:author',function (req, res) {
 
-  const author = req.body.author;
+  const author = req.params.author;
   let searched_book = books.filter((book)=>book["author"]===author);
   if(searched_book.length>0){
     res.send(searched_book[0]);
@@ -57,7 +57,7 @@ public_users.get('/author/:author',function (req, res) {
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
 
-  const title= req.body.title;
+  const title= req.params.title;
   let searched_book = books.filter((book)=>book["title"]===title);
   if(searched_book.length>0){
     res.send(searched_book[0]);
