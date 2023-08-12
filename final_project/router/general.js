@@ -71,7 +71,7 @@ public_users.get('/review/:isbn',function (req, res) {
    const isbn = req.params.isbn;
   let searched_book = books[isbn];
   if(searched_book){
-    res.send(searched_book["reviews"]);
+    res.json(searched_book["reviews"]);
   }else{
     res.send("book is not available");
   }
