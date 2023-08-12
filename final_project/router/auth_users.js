@@ -58,12 +58,15 @@ regd_users.post("/login", (req,res) => {
 regd_users.put("/auth/review/:isbn", (req, res) => {
   
   const isbn = req.params.isbn;
+  const username = req.body.username;
   let review = req.body.reviews;
-  let searched_book = books[isbn-1];
-  if(searched_book.length>0){
-     let book = searched_book[0];
-     book.reviews = review;
-     books[isbn-1] = book;
+  let book = books[isbn];
+  if(book){
+   
+      book.reviews[username] = review;
+    
+     
+     books[isbn] = book;
 
      res.send(`The review for book with isbn ${isbn} is updated`);
   }else{
