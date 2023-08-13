@@ -9,7 +9,7 @@ const isValid = (username)=>{ //returns boolean
 //write code to check is the username is valid
   let ExistingUser = users.filter((user)=>user.username===username);
 
-  if(ExistingUser.lenth>0){
+  if(ExistingUser.length>0){
     return true;
   }
   else{
@@ -19,7 +19,7 @@ const isValid = (username)=>{ //returns boolean
 
 const authenticatedUser = (username,password)=>{
   let validusers = users.filter((user)=>{
-    user.username===username && user.password===password
+    return user.username===username && user.password===password
   });
 
   if(validusers.length>0){
