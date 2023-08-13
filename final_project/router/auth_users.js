@@ -82,6 +82,28 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
   }
 });
 
+
+regd_users.delete("/auth/review/:isbn", (req, res) => {
+  
+    const isbn = req.params.isbn;
+    const username = req.session.authorization.username;
+    const book = books[isbn];
+  
+    if(!isValid(username)){
+        return res.status(403).json({message:'User is not authenticated'})
+    }
+    if(book){
+     
+       delete book.reviews[username] ;
+      
+       
+       books[isbn] = book;
+  
+       res.send(`The review for book with isbn ${isbn} is deleted`);
+    }else{
+      res.send("book is not available");
+    }
+  });
 module.exports.authenticated = regd_users;
 module.exports.isValid = isValid;
 module.exports.users = users;
