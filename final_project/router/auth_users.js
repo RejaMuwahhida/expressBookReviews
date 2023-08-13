@@ -60,11 +60,17 @@ regd_users.post("/login", (req,res) => {
 regd_users.put("/auth/review/:isbn", (req, res) => {
   
   const isbn = req.params.isbn;
-  const username = req.body.username;
-  let review = req.body.reviews;
-  let book = books[isbn];
+  const username = req.session.authorization.username;
+  let review = req.body.review;
+  const book = books[isbn];
+
+  if(!isValid(username)){
+      return res.status(403).json({message:'User is not authenticated'})
+  }
   if(book){
-   
+    if(!book.reviews){
+        book.reviews = {};
+    }
       book.reviews[username] = review;
     
      
